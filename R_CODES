@@ -1,0 +1,517 @@
+R codes
+setwd("C:\\Users\\Uche\\Desktop\\COVENTRY MSC\\intro_to_stats7089CEM")
+
+
+data = read.csv("gene_data.csv", header = F)
+data = as.matrix(data)
+
+TASK 1.1 Time series plot
+1.1.1
+plot(data$V1, data$V2, type = "l",
+xlab = "Sample_Time",
+ylab = "gene1")
+
+1.1.2
+plot(data$V1, data$V3, type = "l", col = 2,
+xlab = "Sample_Time",
+ylab = "gene2")
+
+1.1.3
+plot(data$V1, data$V4, type = "l", col = 3,
+xlab = "Sample_Time",
+ylab = "gene3")
+
+1.1.4
+plot(data$V1, data$V5, type = "l", col = 4,
+xlab = "Sample_Time",
+ylab = "gene4")
+
+1.1.5
+plot(data$V1, data$V6, type = "l", col = 6,
+xlab = "Sample_Time",
+ylab = "gene5")
+
+
+TASK 1.2 Histogram and gene expression data summary R-code
+
+1.2.1
+#gene1 histogram chart
+Gene_1<-data$V2
+hist(Gene_1,breaks = 10,col = "yellow",border = "blue", main = "histogram of gene1")
+abline(v = mean(data$V2), lwd = 2 , col="blue")
+abline(v = median(data$V2), lwd = 3 , col = "green")
+summary(data$V2)
+
+1.2.2
+#gene2 histogram chart
+Gene_2<- data$V3
+hist(Gene_2,breaks = 10,col = "green" ,border = "blue", main = "histogram of gene2")
+abline(v = mean(data$V3), lwd = 2 , col="blue")
+abline(v = median(data$V3), lwd = 3 , col = "green")
+summary(data$V3)
+
+1.2.3
+#gene3 histogram chart
+Gene_3<- data$V4
+hist(Gene_3,breaks = 10,col = "red",border = "blue", main = "histogram of gene 3")
+abline(v = mean(data$V4), lwd = 2 , col="blue")
+abline(v = median(data$V4), lwd = 3 , col = "green")
+summary(data$V4)
+
+1.2.4
+#gene4 histogram chart
+Gene_4<-data$V5
+hist(Gene_4,breaks = 15,col = "grey",border = "blue", main = "histogram of gene 4")
+abline(v = mean(data$V5), lwd = 2 , col="blue")
+abline(v = median(data$V5), lwd = 3 , col = "green")
+summary(data$V5) 
+
+1.2.5
+#gene5 histogram chart
+Gene_5<-data$V6
+hist(Gene_5,breaks = 15,col = "purple",border = "blue", main = "histogram of gene 5")
+abline(v = mean(data$V6), lwd = 2 , col="blue")
+abline(v = median(data$V6), lwd = 3 , col = "green")
+summary(data$V6)
+
+
+TASK 1.3 Scatter plot and correlation coefficient R-code to establish the relationship between gene data.
+
+
+Gene_1<-data$V2
+Gene_2<-data$V3
+Gene_3<-data$V4
+Gene_4<-data$V5
+Gene_5<-data$V6
+1.3.1
+plot(Gene_1,Gene_2,
+     xlab = "gene1",
+     ylab = "gene2",		 
+     main = "gene1 vs gene2")
+cor.test(Gene_1,Gene_2,method = "pearson")
+
+1.3.2
+plot(Gene_1,Gene_3,
+     xlab = "gene1",
+     ylab = "gene3",		 
+     main = "gene1 vs gene3")
+cor.test(Gene_1,Gene_3, method = "pearson")
+
+1.3.3
+plot(Gene_1,Gene_4,
+     xlab = "gene1",
+     ylab = "gene4",		 
+     main = "gene1 vs gene4")
+cor.test(Gene_1,Gene_4,method = "pearson")
+
+1.3.4
+plot(Gene_1,Gene_5,
+     xlab = "gene1",
+     ylab = "gene5",		 
+     main = "gene1 vs gene5")
+cor.test(Gene_1,Gene_5, method = "pearson")
+
+1.3.5
+plot(Gene_2,Gene_3,
+     xlab = "gene2",
+     ylab = "gene3",		 
+     main = "gene2 vs gene3")
+cor.test(Gene_2,Gene_3, method = "pearson")
+
+1.3.6
+plot(Gene_2,Gene_4,
+     xlab = "gene2",
+     ylab = "gene4",		 
+     main = "gene2 vs gene4")
+cor.test(Gene_2,Gene_4,method = "pearson")
+
+1.3.7
+plot(Gene_2,Gene_5,
+     xlab = "gene2",
+     ylab = "gene5",		 
+     main = "gene2 vs gene5")
+cor.test(Gene_2,Gene_5,method = "pearson")
+
+1.3.8
+plot(Gene_3,Gene_4,
+     xlab = "gene3",
+     ylab = "gene4",		 
+     main = "gene3 vs gene4")
+cor.test(Gene_3,Gene_4, method = "pearson")
+
+1.3.9
+plot(Gene_3,Gene_5,
+     xlab = "gene3",
+     ylab = "gene5",		 
+     main = "gene3 vs gene5")
+cor.test(Gene_3,Gene_5, method = "pearson")
+
+1.4.0
+plot(Gene_4,Gene_5,
+     xlab = "gene4",
+     ylab = "gene5",		 
+     main = "gene4 vs gene5")
+cor.test(Gene_4,Gene_5,method = "pearson")
+
+TASK 2.0 FITTING THE REGRESSION MODELS TO THE DATA SET
+2.0.1
+#Model 1: 
+
+y=data$V3       #gene2
+x4=data$V5      #gene4
+x3=data$V4      #gene3
+model_1<-lm(y~x4 + (x3^2), data)
+summary(model_1)
+
+
+
+2.0.2
+#Model 2:
+
+y = data$V3     #gene2
+x4 = data$V5    #gene4
+x3 = data$V4    #gene3
+x5 = data$V6    #gene5
+model_2<-lm(y~x4+(x3^2)+x5,data)
+summary(model_2)
+
+2.0.3
+#Model 3:
+
+y = data$V3      #gene2
+x3 = data$V4     #gene3
+x4 = data$V5     #gene4
+x5 = data$V6     #gene5
+model_3<-lm(y~x3+x4+(x5^3),data)
+summary(model_3)
+
+2.0.4
+#Model 4:
+
+y = data$V3
+x4 = data$V5
+x3 = data$V4
+x5 = data$V6
+model_4<-lm(y~x4+(x3^2)+(x5^3),data)
+summary(model_4)
+
+2.0.5
+#Model 5:
+
+y = data$V3
+x4 = data$V5
+x1 = data$V2
+x3 = data$V4
+model_5<-lm(y~x4+(x1^2)+(x3^2))
+summary(model_5)
+
+#Task 2.1: Estimate model parameters using Least Squares 
+
+2.1.1
+#model_1 estimate
+
+y = matrix(data$V3,nrow = 301,ncol = 1)
+print(y)
+x4 = matrix(data$V5,nrow = 301,ncol = 1)
+x3 = matrix(data$V4,nrow = 301,ncol = 1)
+ones = matrix(1 , length(y),1)
+X<- cbind(ones, x4, (x3^2))
+print(X)
+thetaHat = solve(t(X) %*% X) %*% t(X) %*% y
+print(thetaHat)
+
+2.1.2
+#Model_2 parameter estimator
+
+y = matrix(data$V3,nrow = 301,ncol = 1)
+print(y)
+x4 = matrix(data$V5,nrow = 301,ncol = 1)
+x3 = matrix(data$V4,nrow = 301,ncol = 1)
+x5 = matrix(data$V6,nrow = 301,ncol = 1)
+ones = matrix(1 , length(y),1)
+X<- cbind(ones, x4, (x3^2) , x5)
+
+print(X)
+thetaHat = solve(t(X) %*% X) %*% t(X) %*% y
+print(thetaHat)
+
+2.1.3
+#Model 3: 
+
+y = matrix(data$V3,nrow = 301,ncol = 1)
+print(y)
+x3 = matrix(data$V4,nrow = 301,ncol = 1)
+x4 = matrix(data$V5,nrow = 301,ncol = 1)
+x5 = matrix(data$V6,nrow = 301,ncol = 1)
+ones = matrix(1 , length(y),1)
+X<- cbind(ones, x3, x4 , (x5^3))
+
+print(X)
+thetaHat = solve(t(X) %*% X) %*% t(X) %*% y
+print(thetaHat)
+
+2.1.4
+#Model 4 : 
+
+y = matrix(data$V3,nrow = 301,ncol = 1)
+print(y)
+x4 = matrix(data$V5,nrow = 301,ncol = 1)
+x3 = matrix(data$V4,nrow = 301,ncol = 1)
+x5 = matrix(data$V6,nrow = 301,ncol = 1)
+ones = matrix(1 , length(y),1)
+X<- cbind(ones, x4, (x3^2) , (x5^3))
+
+print(X)
+thetaHat = solve(t(X) %*% X) %*% t(X) %*% y
+print(thetaHat)
+
+
+2.1.5
+
+#Model 5:
+
+y = matrix(data$V3,nrow = 301,ncol = 1)
+print(y)
+x4 = matrix(data$V5,nrow = 301,ncol = 1)
+x1 = matrix(data$V2,nrow = 301,ncol = 1)
+x3 = matrix(data$V4,nrow = 301,ncol = 1)
+ones = matrix(1 , length(y),1)
+X<- cbind(ones, x4, (x1^2) , (x3^2))
+
+print(X)
+thetaHat = solve(t(X) %*% X) %*% t(X) %*% y
+print(thetaHat)
+
+TASK 2.2 – 2.4
+# RSS, LOG-LIKELIHOOD FUNCTION, AIC, BIC
+
+#MODEL 1
+y_Hat = X %*% thetaHat
+error = y - y_Hat
+#RSSE = norm(error, type = "2")^2
+RSSE = sum((y-y_Hat)^2)
+print(RSSE)
+
+#logliklihoood function
+n<-nrow(y)
+sigmahat2<- RSSE/(n-1)
+loglik_1<- -n/2*(log(2*pi))-n/2*(log(sigmahat2))-1/2*(sigmahat2*RSSE)
+print(loglik_1)
+
+#Akaike information criterion (AIC)
+K = 3
+AIC_1 <- 2*K - (2*loglik_1)
+print(AIC_1)
+#Bayesian information criterion (BIC)
+k = 3
+n<-nrow(y)
+BIC_1<- k*log(n) - (2*loglik_1)
+print(BIC_1)
+
+#MODEL 2
+y_Hat = X %*% thetaHat
+error = y - y_Hat
+
+#RSSE = norm(error, type = "2")^2
+RSSE = sum((y-y_Hat)^2)
+print(RSSE)
+
+#logliklihoood function
+n<-nrow(y)
+sigmahat2<- RSSE/(n-1)
+loglik_2<- -n/2*(log(2*pi))-n/2*(log(sigmahat2))-1/2*(sigmahat2*RSSE)
+print(loglik_2)
+
+#Akaike information criterion (AIC)
+K = 4
+AIC_2 <- 2*K - (2*loglik_2)
+print(AIC_2)
+#Bayesian information criterion (BIC)
+k = 4
+n<-nrow(y)
+BIC_2<- k*log(n) - (2*loglik_2)
+print(BIC_2)
+
+#MODEL 3
+y_Hat = X %*% thetaHat
+error = y - y_Hat
+
+#RSSE = norm(error, type = "2")^2
+RSSE = sum((y-y_Hat)^2)
+print(RSSE)
+
+#logliklihoood function
+n<-nrow(y)
+sigmahat2<- RSSE/(n-1)
+loglik_3<- -n/2*(log(2*pi))-n/2*(log(sigmahat2))-1/2*(sigmahat2*RSSE)
+print(loglik_3)
+
+#Akaike information criterion (AIC)
+K = 4
+AIC_3 <- 2*K - (2*loglik_3)
+print(AIC_3)
+#Bayesian information criterion (BIC)
+k = 4
+n<-nrow(y)
+BIC_3<- k*log(n) - (2*loglik_3)
+print(BIC_3)
+
+#MODEL 4
+y_Hat = X %*% thetaHat
+error = y - y_Hat
+
+#RSSE = norm(error, type = "2")^2
+RSSE = sum((y-y_Hat)^2)
+print(RSSE)
+
+#logliklihoood function
+n<-nrow(y)
+sigmahat2<- RSSE/(n-1)
+loglik_4<- -n/2*(log(2*pi))-n/2*(log(sigmahat2))-1/2*(sigmahat2*RSSE)
+print(loglik_4)
+
+#Akaike information criterion (AIC)
+K = 4
+AIC_4 <- 2*K - (2*loglik_4)
+print(AIC_4)
+#Bayesian information criterion (BIC)
+k = 4
+n<-nrow(y)
+BIC_4<- k*log(n) - (2*loglik_4)
+print(BIC_4)
+
+#MODEL 5
+y_Hat = X %*% thetaHat
+error = y - y_Hat
+
+#RSSE = norm(error, type = "2")^2
+RSSE = sum((y-y_Hat)^2)
+print(RSSE)
+#logliklihoood function
+n<-nrow(y)
+sigmahat2<- RSSE/(n-1)
+loglik_5<- -n/2*(log(2*pi))-n/2*(log(sigmahat2))-1/2*(sigmahat2*RSSE)
+print(loglik_5)
+
+#Akaike information criterion (AIC)
+K = 4
+AIC_5 <- 2*K - (2*loglik_5)
+print(AIC_5)
+#Bayesian information criterion (BIC)
+k = 4
+n<-nrow(y)
+BIC_5<- k*log(n) - (2*loglik_5)
+print(BIC_5)
+
+
+
+Task 2.5: R-Code
+
+2.5.1 Model 1:
+
+y=data$V3       #gene2
+x4=data$V5      #gene4
+x3=data$V4      #gene3
+model_1<-lm(y~x4 + (x3^2), data)
+summary(model_1)
+#distribution of model prediction errors Q-Q plot (residuals){TASK 2.5}
+res<-resid(model_1)
+qqnorm(res)
+qqline(res,lwd = 2,col = "red")
+plot(density(res),col = "brown",lwd = 2,main = "Model_1 residual_dist")
+
+2.5.2 Model 2:
+
+y = data$V3     #gene2
+x4 = data$V5    #gene4
+x3 = data$V4    #gene3
+x5 = data$V6    #gene5
+model_2<-lm(y~x4+(x3^2)+x5,data)
+summary(model_2)
+#distribution of model prediction errors Q-Q plot (residuals){TASK 2.5}
+res<-resid(model_2)
+qqnorm(res)
+qqline(res, col = "red")
+plot(density(res),col = "blue",lwd = 2,main = "Model_2 residual dist")
+
+
+
+2.5.3 Model 3:
+
+y = data$V3      #gene2
+x3 = data$V4     #gene3
+x4 = data$V5     #gene4
+x5 = data$V6     #gene5
+model_3<-lm(y~x3+x4+(x5^3),data)
+summary(model_3)
+#distribution of model prediction errors Q-Q plot (residuals){TASK 2.5}
+res<-resid(model_3)
+qqnorm(res)
+qqline(res,col = "red")
+plot(density(res),col = "cyan",lwd = 2, main = "Model_3 residual dist")
+
+
+
+
+2.5.4 Model 4:
+
+y = data$V3
+x4 = data$V5
+x3 = data$V4
+x5 = data$V6
+model_4<-lm(y~x4+(x3^2)+(x5^3),data)
+summary(model_4)
+#distribution of model prediction errors Q-Q plot (residuals){TASK 2.5}
+res<-resid(model_4)
+qqnorm(res)
+qqline(res,col = "red")
+plot(density(res),lwd = 2,main = 'Model_4 residual dist')
+
+
+
+2.5.5 Model 5:
+	
+y = data$V3
+x4 = data$V5
+x1 = data$V2
+x3 = data$V4
+model_5<-lm(y~x4+(x1^2)+(x3^2))
+summary(model_5)
+#distribution of model prediction errors Q-Q plot (residuals)
+res<-resid(model_5)
+qqnorm(res)
+qqline(res,col = "red")
+plot(density(res),col = "green",lwd = 2,main = "Model_5 residual dist")
+
+
+
+2.7 SPLITTING DATA INTO TRAINING AND TESTING
+
+2.7.1
+install.packages("caTools")
+library(caTools)
+setwd("C:\\Users\\Uche\\Desktop\\COVENTRY MSC\\intro_to_stats7089CEM")
+data = read.csv("gene_data.csv", header = F)
+split = sample.split(Y = data$V3, SplitRatio = 0.7)
+
+#subsetting into Train data
+train = data[split,]
+#subsetting into Test data
+test = data[!split,]
+dim(train)
+dim(test)
+
+2.7.2 
+
+y = train$V3
+x4 = train$V5
+x3 = train$V4
+x5 = train$V6
+model_4<-lm(y~x4+(x3^2)+(x5^3),train)
+summary(model_4)
+
+#compute the model’s output/prediction on the testing data
+gene2_predict<-predict(model_4,test)
+summary(gene2_predict)
+confidence_predict<-predict(model_4,test,interval = "confidence")
+summary(Model_prediction)
